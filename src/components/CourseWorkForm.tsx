@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function CourseWorkForm({ onSubmit }) {
+export default function CourseWorkForm({ onSubmit: any }) {
   const [formData, setFormData] = useState({
     courseWorkType: '',
     subject: '',

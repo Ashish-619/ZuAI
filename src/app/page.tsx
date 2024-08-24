@@ -26,7 +26,7 @@ export default function Home() {
     setCourseWorks(storedCourseWorks);
   }, []);
 
-  const addCourseWork = (newCourseWork) => {
+  const addCourseWork = (newCourseWork: any) => {
     const dummyData = generateDummyData(); // Generate dummy data
     const updatedCourseWork = { ...newCourseWork, ...dummyData }; // Merge uploaded file data with dummy data
 
