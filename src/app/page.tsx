@@ -15,6 +15,13 @@ interface CourseWork {
   date: string;
 }
 
+interface FileData {
+  name: string;
+  type: string;
+  size: number;
+  lastModified: number;
+}
+
 // Function to generate dummy data
 const generateDummyData = () => ({
   type: 'assignment', // or 'quiz', 'exam' - you can randomize this
