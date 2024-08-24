@@ -1,22 +1,33 @@
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-export default function FileUpload({ onFileUpload }) {
-  const onDrop = useCallback((acceptedFiles: {
-    name: any;
-    size: any; lastModified: any; 
-}[]) => {
+interface FileData {
+  type: string;
+  name: string;
+  size: number;
+  lastModified: number;
+}
+
+type OnFileUpload = (fileData: FileData) => void;
+
+interface FileUploadProps {
+  onFileUpload: OnFileUpload;
+}
+
+export default function FileUpload({ onFileUpload }: FileUploadProps) {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
+      const file = acceptedFiles[0];
       onFileUpload({
         type: 'file',
-        name: acceptedFiles[0].name,
-        size: acceptedFiles[0].size,
-        lastModified: acceptedFiles[0].lastModified,
+        name: file.name,
+        size: file.size,
+        lastModified: file.lastModified,
       });
     }
   }, [onFileUpload]);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: { 'application/pdf': ['.pdf'] },
     maxSize: 25 * 1024 * 1024, // 25MB
@@ -37,7 +48,6 @@ export default function FileUpload({ onFileUpload }) {
         <button className="mt-4 px-4 py-2 bg-white font-bold text-purple-600 rounded-full text-lg border shadow-md">
           Upload your file
         </button>
-
       </div>
     </div>
   );

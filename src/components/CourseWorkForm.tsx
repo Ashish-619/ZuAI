@@ -1,25 +1,45 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-export default function CourseWorkForm({ onSubmit }) {
-  const [formData, setFormData] = useState({
+// Define the shape of the form data
+interface FormData {
+  courseWorkType: string;
+  subject: string;
+  essayTitle: string;
+  date?: string;
+}
+
+interface CourseWorkFormProps {
+  onSubmit: OnSubmit;
+}
+
+// Define the type for the onSubmit function
+type OnSubmit = (data: { type: string } & FormData) => void;
+
+interface CourseWorkFormProps {
+  onSubmit: OnSubmit;
+}
+
+export default function CourseWorkForm({ onSubmit }: CourseWorkFormProps) {
+  const [formData, setFormData] = useState<FormData>({
     courseWorkType: '',
     subject: '',
     essayTitle: '',
-  })
+    date: '',
+  });
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     onSubmit({
       type: 'form',
       ...formData,
       date: new Date().toISOString(),
-    })
-    setFormData({ courseWorkType: '', subject: '', essayTitle: '' })
-  }
+    });
+    setFormData({ courseWorkType: '', subject: '', essayTitle: '' });
+  };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6">
@@ -85,7 +105,5 @@ export default function CourseWorkForm({ onSubmit }) {
         </button>
       </div>
     </form>
-
-
-  )
+  );
 }

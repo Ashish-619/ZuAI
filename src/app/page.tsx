@@ -7,13 +7,19 @@ import EvaluationCard from '../components/EvaluationCard';
 import CourseWorkList from '../components/CourseWorkList';
 import ExploreCourseWork from '../components/ExploreCourseWork';
 
-
 interface CourseWork {
-  type: string; 
+  type: string;
   title: string;
   description: string;
   score: number;
   date: string;
+}
+
+interface FileData {
+  type: string;
+  name: string;
+  size: number;
+  lastModified: number;
 }
 
 // Function to generate dummy data
@@ -34,18 +40,25 @@ export default function Home() {
     setCourseWorks(storedCourseWorks);
   }, []);
 
-  const addCourseWork = (newCourseWork: CourseWork) => {
-    const dummyData = generateDummyData(); // Generate dummy data
-    const updatedCourseWork = { ...newCourseWork, ...dummyData }; // Merge uploaded file data with dummy data
+  const addCourseWork = (newCourseWork: CourseWork | FileData) => {
+    if ('name' in newCourseWork) {
+      // Handle file data
+      const dummyData = generateDummyData(); // Generate dummy data
+      const updatedCourseWork = { ...dummyData, file: newCourseWork }; // Include file data if needed
 
-    const updatedCourseWorks = [...courseWorks, updatedCourseWork];
-    setCourseWorks(updatedCourseWorks);
-    localStorage.setItem('courseWorks', JSON.stringify(updatedCourseWorks));
+      const updatedCourseWorks = [...courseWorks, updatedCourseWork as CourseWork];
+      setCourseWorks(updatedCourseWorks);
+      localStorage.setItem('courseWorks', JSON.stringify(updatedCourseWorks));
+    } else {
+      // Handle coursework data
+      const updatedCourseWorks = [...courseWorks, newCourseWork];
+      setCourseWorks(updatedCourseWorks);
+      localStorage.setItem('courseWorks', JSON.stringify(updatedCourseWorks));
+    }
   };
 
   return (
     <Layout>
-      {/* <Sidebar/> */}
       <h1 className="text-3xl font-bold mb-6 max-w-2xl">
         Hey IB Folks! Unsure about the quality of your answers? <span className="text-purple-600">We get you.</span>
       </h1>
