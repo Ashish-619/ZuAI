@@ -6,14 +6,8 @@ interface FormData {
   date?: string;
 }
 
-// Define the type for the onSubmit function
-type OnSubmit = (data: { type: string } & FormData) => void;
 
-interface CourseWorkFormProps {
-  onSubmit: OnSubmit;
-}
-
-export default function CourseWorkForm({ onSubmit }: CourseWorkFormProps) {
+export default function CourseWorkForm({ onSubmit }: any) {
   const [formData, setFormData] = useState<FormData>({
     courseWorkType: '',
     subject: '',
