@@ -1,15 +1,9 @@
 import { useState } from 'react';
-
-// Define the shape of the form data
 interface FormData {
   courseWorkType: string;
   subject: string;
   essayTitle: string;
   date?: string;
-}
-
-interface CourseWorkFormProps {
-  onSubmit: OnSubmit;
 }
 
 // Define the type for the onSubmit function
@@ -38,7 +32,7 @@ export default function CourseWorkForm({ onSubmit }: CourseWorkFormProps) {
       ...formData,
       date: new Date().toISOString(),
     });
-    setFormData({ courseWorkType: '', subject: '', essayTitle: '' });
+    setFormData({ courseWorkType: '', subject: '', essayTitle: '', date: '' });
   };
 
   return (
@@ -64,7 +58,6 @@ export default function CourseWorkForm({ onSubmit }: CourseWorkFormProps) {
 
         {/* Subject select */}
         <div className="flex-1">
-          {/* Keeping the label invisible on md and above for consistent spacing */}
           <p className="invisible md:visible block text-md font-medium text-customGray">Subject</p>
           <select
             name="subject"

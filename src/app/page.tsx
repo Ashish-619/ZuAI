@@ -15,13 +15,6 @@ interface CourseWork {
   date: string;
 }
 
-interface FileData {
-  type: string;
-  name: string;
-  size: number;
-  lastModified: number;
-}
-
 // Function to generate dummy data
 const generateDummyData = () => ({
   type: 'assignment', // or 'quiz', 'exam' - you can randomize this
@@ -41,10 +34,10 @@ export default function Home() {
   }, []);
 
   const addCourseWork = (newCourseWork: CourseWork | FileData) => {
-    if ('name' in newCourseWork) {
+    if ('type' in newCourseWork && 'name' in newCourseWork) {
       // Handle file data
       const dummyData = generateDummyData(); // Generate dummy data
-      const updatedCourseWork = { ...dummyData, file: newCourseWork }; // Include file data if needed
+      const updatedCourseWork = { ...newCourseWork, ...dummyData }; // Merge uploaded file data with dummy data
 
       const updatedCourseWorks = [...courseWorks, updatedCourseWork as CourseWork];
       setCourseWorks(updatedCourseWorks);
