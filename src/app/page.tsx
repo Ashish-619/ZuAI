@@ -8,6 +8,14 @@ import CourseWorkList from '../components/CourseWorkList';
 import ExploreCourseWork from '../components/ExploreCourseWork';
 import Sidebar from './sidebar';
 
+interface CourseWork {
+  type: string; 
+  title: string;
+  description: string;
+  score: number;
+  date: string;
+}
+
 // Function to generate dummy data
 const generateDummyData = () => ({
   type: 'assignment', // or 'quiz', 'exam' - you can randomize this
@@ -18,7 +26,7 @@ const generateDummyData = () => ({
 });
 
 export default function Home() {
-  const [courseWorks, setCourseWorks] = useState([]);
+  const [courseWorks, setCourseWorks] = useState<CourseWork[]>([]);
 
   useEffect(() => {
     // Load courseworks from local storage
@@ -26,7 +34,7 @@ export default function Home() {
     setCourseWorks(storedCourseWorks);
   }, []);
 
-  const addCourseWork = (newCourseWork: any) => {
+  const addCourseWork = (newCourseWork: CourseWork) => {
     const dummyData = generateDummyData(); // Generate dummy data
     const updatedCourseWork = { ...newCourseWork, ...dummyData }; // Merge uploaded file data with dummy data
 
