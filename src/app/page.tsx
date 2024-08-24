@@ -6,7 +6,7 @@ import CourseWorkForm from '../components/CourseWorkForm';
 import EvaluationCard from '../components/EvaluationCard';
 import CourseWorkList from '../components/CourseWorkList';
 import ExploreCourseWork from '../components/ExploreCourseWork';
-import Sidebar from './sidebar';
+
 
 interface CourseWork {
   type: string; 

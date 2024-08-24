@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-export default function CourseWorkForm({ onSubmit: any }) {
+export default function CourseWorkForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     courseWorkType: '',
     subject: '',
     essayTitle: '',
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     onSubmit({
       type: 'form',

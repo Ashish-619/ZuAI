@@ -2,7 +2,10 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 export default function FileUpload({ onFileUpload }) {
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles: {
+    name: any;
+    size: any; lastModified: any; 
+}[]) => {
     if (acceptedFiles[0]) {
       onFileUpload({
         type: 'file',
