@@ -1,4 +1,4 @@
-export default function CourseWorkCard({ work, expanded = false }) {
+export default function CourseWorkCard({ work, expanded = false }: { work: { title: string; subject?: string; readTime?: string; wordCount?: number; rating?: string; language?: string; content?: string }; expanded?: boolean }) {
     // Use dummy data for all fields except title
     const dummyData = {
         subject: 'Mathematics', // Dummy subject

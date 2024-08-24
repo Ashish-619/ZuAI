@@ -9,7 +9,7 @@ export default function CourseWorkList({ courseWorks }) {
     <div className="mt-8">
       <h2 className="text-xl font-bold mb-4">My coursework</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {displayedWorks.map((work: unknown, index: Key | null | undefined) => (
+        {displayedWorks.map((work: { title: string; subject?: string; readTime?: string; wordCount?: number; rating?: string; language?: string; content?: string; }, index: Key | null | undefined) => (
           <CourseWorkCard key={index} work={work} />
         ))}
       </div>
