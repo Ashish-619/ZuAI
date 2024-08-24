@@ -1,7 +1,7 @@
 import Header from './Header'
 import Sidebar from './Sidebar'
 
-export default function Layout({ children }) {
+export default function Layout({ children }: any) {
   return (
     <div className="min-h-screen bg-[#F5F8FF] flex flex-col">
       <Header />
